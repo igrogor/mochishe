@@ -40,11 +40,12 @@ int f2() {
         scanf("%c", &str[i]);
     }
     for (int i = 1; str[i] != '\n'; i += 2) {
-        if(str[i] != ' ') { 
-        printf("n/a");
-        return 1; }
+        if (str[i] != ' ') {
+            printf("n/a");
+            return 1;
+        }
     }
-    for (int i = 0; str[i - 5] != '\n';i += 2) {
+    for (int i = 0; str[i - 5] != '\n'; i += 2) {
         printf("%x ", str[i]);
     }
 
