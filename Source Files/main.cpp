@@ -11,11 +11,16 @@
 
 
 int main() {
-    Journal journal;
-    journal.year = 1912;
-    journal.name = "match";
-    journal.circulation = 100;
-    journal.Print();
+    Journal journal[N];
+
+    for(int i = 0; i < N; i++){
+        journal[i].year = 1912 + i;
+        strcpy(journal[i].name,"match");
+        //journal[i].name = "match";
+        journal[i].circulation = 100 + i;
+    }
+
+    journal[1].Print(journal);
 
     return 0;
 }
