@@ -7,23 +7,18 @@
 
 #include "../HeaderFiles/headers.h"
 
-
-
-
 int main() {
     Journal journal[N];
 
-    for(int i = 0; i < N; i++){
-        journal[i].year = 1912 + i;
-        strcpy(journal[i].name,"match");
-        //journal[i].name = "match";
-        journal[i].circulation = 100 + i;
+    for (int i = 0; i < N; i++) {
+        journal[i].set_year(1835 + i);
+        journal[i].set_name("PlayBoy");
+        journal[i].set_circulation(12000 + i);
     }
 
-    journal[1].Print(journal);
+    for (int i = 0; i < N; i++) {
+        journal[i].Print();
+    }
 
     return 0;
 }
-
-
-

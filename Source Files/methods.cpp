@@ -1,10 +1,10 @@
 #include "../HeaderFiles/headers.h"
 
-
 using namespace std;
 
-void Journal::Print(Journal *journal){
-    for(int i = 0; i < N; i++){
-        cout<< journal[i].name << "\t " << journal[i].year << "\t "<< journal[i].circulation << endl;
-    }
-}
+void Journal::Print() { cout << name << "\t " << year << "\t " << circulation << endl; }
+
+void Journal::set_name(const char *name) { strcpy(this->name, name); }
+
+void Journal::set_year(int year) { this->year = year; }
+void Journal::set_circulation(int circulation) { this->circulation = circulation; }

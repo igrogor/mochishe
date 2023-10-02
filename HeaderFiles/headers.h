@@ -1,24 +1,27 @@
 #ifndef HEADERS
 #define HEADERS
 
-
-
-#include <iostream>
-#include <cstdlib>
 #include <time.h>
-using namespace std;
 
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+using namespace std;
+#define N 20
 
 class Journal {
-   int number;
+    int number;
 
    public:
-    char* name;
+    void set_name(const char *name);
+    void set_year(int year);
+    void set_circulation(int circulation);
+    void Print();
+
+   private:
+    char name[N];
     int year;
     int circulation;
-    void Print(); 
-    void add_journal();
-
 };
 
-    #endif
+#endif
