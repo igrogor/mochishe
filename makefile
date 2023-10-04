@@ -9,3 +9,6 @@ lab_beta:
 
 clang:
 	clang-format -i $(SOURCE) $(HEADERS)
+
+clean:
+	rm lab_beta

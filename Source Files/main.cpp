@@ -7,7 +7,20 @@
 
 #include "../HeaderFiles/headers.h"
 
+void main_window();
+
 int main() {
+    
+    main_window();
+
+
+
+    return 0;
+}
+
+void main_window()
+{
+
     Journal journal[N];
 
     for (int i = 0; i < N; i++) {
@@ -16,9 +29,34 @@ int main() {
         journal[i].set_circulation(12000 + i);
     }
 
-    for (int i = 0; i < N; i++) {
-        journal[i].Print();
+    int i = 5;
+    while ((i!= 0))
+    {
+        cout<<"intput num :\n0 - end\n1 - print\n2 - sum journal\n3 - edit journal\n";
+        cin >> i;
+        switch (i)
+        {
+        case 0:
+            return;
+            break;
+        case 1:
+                for (int i = 0; i < N; i++) {
+                    journal[i].Print();
+                }
+            break;
+        case 2:
+            cout<<"inputs number journal";
+            int one, two;
+            cin>> one>>two;
+                journal[one].sum_journal(journal[two]);
+            break;
+        case 3:
+            return;
+            break;
+        
+        default:
+            break;
+        }
     }
-
-    return 0;
+    
 }

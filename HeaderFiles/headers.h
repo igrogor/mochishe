@@ -6,8 +6,11 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
+
 using namespace std;
 #define N 20
+
+
 
 class Journal {
     int number;
@@ -17,11 +20,16 @@ class Journal {
     void set_year(int year);
     void set_circulation(int circulation);
     void Print();
+    void sum_journal(Journal& other);
+
 
    private:
     char name[N];
     int year;
     int circulation;
 };
+
+// void main_window(Journal* journal);
+
 
 #endif
