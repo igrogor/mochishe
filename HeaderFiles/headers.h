@@ -21,7 +21,7 @@ class Journal {
     void set_circulation(int circulation);
     void Print();
     void sum_journal(Journal& other);
-
+    void edit_journal(const char *new_name, int new_year, int new_circulation);
 
    private:
     char name[N];
