@@ -18,15 +18,14 @@ int main() {
 void main_window() {
     Journal journal[N];
 
-    for (int i = 0; i < N-1; i++) {
+    for (int i = 0; i < N - 1; i++) {
         journal[i].set_year(1835 + i);
         journal[i].set_name("PlayBoy");
         journal[i].set_circulation(12000 + i);
     }
     journal[3].set_year(1835234534);
-    journal[3].set_name("ABOBUSdfghgrgfvdfgdfdfwfxsfsdfsdfsdf");
+    journal[3].set_name("ABOBUSdfghgrgfvdfgdfdfwfxsfsdfsdfsdf   3");
     journal[3].set_circulation(12000234234);
-
 
     int i = 5;
     while ((i != 0)) {
@@ -49,8 +48,15 @@ void main_window() {
                 break;
             case 3:
                 int one_1;
+                cout << "input num journal.." << endl;
                 cin >> one_1;
-                journal[one_1].edit_journal("Journal_Biysk_rbochi", 228, 1337);
+                cout << "input new: name - year - circulation " << endl;
+                char *new_name;
+                int new_year, new_circulation;
+                cin >> new_name;
+                cin >> new_year;
+                cin >> new_circulation;
+                journal[one_1].edit_journal(new_name, new_year, new_circulation);
                 break;
 
             default:

@@ -12,3 +12,8 @@ clang:
 
 clean:
 	rm lab_beta
+
+push:
+	git add .
+	git commit -m"Auto push"
+	git push origin develop
