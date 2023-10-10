@@ -8,28 +8,23 @@
 #include <iostream>
 
 using namespace std;
-#define N 20
-
-
+#define N 4
 
 class Journal {
     int number;
 
    public:
-    void set_name(const char *name);
+    void set_name(char *nam);
     void set_year(int year);
     void set_circulation(int circulation);
     void Print();
-    void sum_journal(Journal& other);
-    void edit_journal(const char *new_name, int new_year, int new_circulation);
+    void sum_journal(Journal &other);
+    void edit_journal(char *new_name, int new_year, int new_circulation);
 
    private:
-    char name[N];
+    char *name;
     int year;
     int circulation;
 };
-
-// void main_window(Journal* journal);
-
 
 #endif

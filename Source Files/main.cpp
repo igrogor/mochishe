@@ -18,11 +18,15 @@ int main() {
 void main_window() {
     Journal journal[N];
 
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N-1; i++) {
         journal[i].set_year(1835 + i);
         journal[i].set_name("PlayBoy");
         journal[i].set_circulation(12000 + i);
     }
+    journal[3].set_year(1835234534);
+    journal[3].set_name("ABOBUSdfghgrgfvdfgdfdfwfxsfsdfsdfsdf");
+    journal[3].set_circulation(12000234234);
+
 
     int i = 5;
     while ((i != 0)) {

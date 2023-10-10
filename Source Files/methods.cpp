@@ -4,7 +4,7 @@ using namespace std;
 
 void Journal::Print() { cout << name << "\t " << year << "\t " << circulation << endl; }
 
-void Journal::set_name(const char *name) { strcpy(this->name, name); }
+// void Journal::set_name( char *name) { strcpy(this->name, name); }
 
 void Journal::set_year(int year) { this->year = year; }
 
@@ -16,8 +16,14 @@ void Journal::sum_journal(Journal &other) {
     this->circulation += other.circulation;
 }
 
-void Journal::edit_journal(const char *new_name, int new_year, int new_circulation) {
+void Journal::edit_journal(char *new_name, int new_year, int new_circulation) {
     set_name(new_name);
     set_year(new_year);
     set_circulation(new_circulation);
+}
+
+void Journal::set_name(char *nam) {
+    name = new char[strlen(nam) + 1];
+
+    strcpy(name, nam);
 }
