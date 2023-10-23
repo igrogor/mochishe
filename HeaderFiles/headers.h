@@ -29,12 +29,15 @@ class Journal {
     void sum_journal(Journal& other);
     void edit_journal(const char* new_name, int new_year, int new_circulation);
     void operator+(Journal& other);
-	const Journal& operator=(const Journal& other);
-	friend Journal operator-(const Journal& one, const Journal& other);
-	Journal& operator++();
-	Journal operator++(int);
+    const Journal& operator=(const Journal& other);
+    friend Journal operator-(const Journal& one, const Journal& other);
+    Journal& operator++();
+    Journal operator++(int);
+    char* Journal::operator char(Journal& other);
 };
 
 Journal operator-(const Journal& one, const Journal& other);
+char* severity_char(char* str1, char* str2);
+int countDigits(int number);
 
 #endif

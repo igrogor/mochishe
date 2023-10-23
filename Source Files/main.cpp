@@ -25,7 +25,7 @@ int main() {
 }
 
 void main_window() {
-    //Journal journal1[N];
+    // Journal journal1[N];
 
     // for (int i = 0; i < N; i++)
     // 	journal1[i].print();
@@ -37,17 +37,33 @@ void main_window() {
     // journal1[3].edit_journal("testname4", 3, 149507);
     // journal1[4].edit_journal("testname5", 2, 157202);
 
-    //for (int i = 0; i < N; i++) journal1[i].print();
-    //cout << endl;
-	Journal *ja = new Journal((char*)"jajaj", 5, 4);
-	Journal jb = Journal((char*)"shishka", 10, 15);
-	*ja = jb;
-	Journal jc = *ja - jb;
-	ja->print();
-	jc.print();
-	(++jc).print();
-	(jc++).print();
-	jc.print();
+    // for (int i = 0; i < N; i++) journal1[i].print();
+    // cout << endl;
+
+    Journal *ja = new Journal((char *)"jajaj", 5, 4);
+    Journal jb = Journal((char *)"shishka", 10, 15);
+
+    Journal sum1 = Journal((char *)"Oleg", 2, 135);
+    Journal sum2 = Journal((char *)"Mongol", 11, 155);
+
+    sum1 + sum2;
+
+    sum1.print();
+
+    *ja = jb;
+
+    Journal jc = *ja - jb;
+
+    ja->print();
+
+    jc.print();
+
+    (++jc).print();
+
+    (jc++).print();
+
+    jc.print();
+
     // Journal journal2("Constructor with param", 4, 354362);
     // journal2.print();
     // cout << endl;
@@ -56,6 +72,6 @@ void main_window() {
     // cout << endl;
     // journal1[0].sum_journal(journal1[2]);
     // journal1[0].print();
-    //journal1[0] + journal1[2];
-    //journal1[0].print();
+    // journal1[0] + journal1[2];
+    // journal1[0].print();
 }
