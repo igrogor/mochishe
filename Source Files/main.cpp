@@ -50,11 +50,11 @@ void main_window() {
 
     sum1.print();
 
-    *ja = jb;
+    Journal jc;
 
-    Journal jc = *ja - jb;
+    jc = sum1 - sum2;
 
-    ja->print();
+    jb.print();
 
     jc.print();
 
@@ -63,6 +63,8 @@ void main_window() {
     (jc++).print();
 
     jc.print();
+
+    cout << bool(jc);
 
     // Journal journal2("Constructor with param", 4, 354362);
     // journal2.print();

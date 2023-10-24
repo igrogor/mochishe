@@ -78,9 +78,8 @@ void Journal::edit_journal(const char* new_name, int new_year, int new_circulati
 Journal operator-(const Journal& one, const Journal& other) {
     int dif_circ = one.circulation - other.circulation;
     int dif_count = one.count_a_year - other.count_a_year;
-    // char* new_name = new char[strlen(severity_char(one.name, other.name)) + 1];
-    // new_name = severity_char(one.name, other.name);
-    char * new_name = "opa+dcf";
+    char* new_name;
+    new_name = severity_char(one.name, other.name);
     return Journal(new_name, dif_count, dif_circ);
 }
 
@@ -108,51 +107,75 @@ Journal Journal::operator++(int) {
     return temp;
 }
 
-char* severity_char(char* str1, char* str2) {
-    char* max_str;
+// char* severity_char(char* str1, char* str2) {
+//     char* max_str;
 
-    if (strlen(str1) > strlen(str2)) {
-        char* max_str = str1;
+//     if (strlen(str1) > strlen(str2)) {
+//         char* max_str = str1;
+//     } else {
+//         char* max_str = str2;
+//     }
+
+//     char* res_str = new char[strlen(max_str) + 1];
+
+//     cout << res_str;
+
+//     for (int i = 0; i < strlen(max_str); i++) {
+//         if (*(str1 + i) == '\0') {
+//             *(res_str + i) = *(str2 + i);
+//         }
+//         if (*(str2 + i) == '\0') {
+//             *(res_str + i) = *(str1 + i);
+//         } else {
+//             *(res_str + i) = *(str1 + i) - *(str2 + i);
+//         }
+//         cout << res_str;
+//     }
+
+//     cout << res_str;
+
+//     return res_str;
+// }
+
+char* severity_char(char* fchar, char* schar) {
+    char* min_char = strlen(fchar) < strlen(schar) ? fchar : schar;
+    char* max_char = strlen(fchar) >= strlen(schar) ? fchar : schar;
+    char* res_char = new char[strlen(max_char) + 1];
+
+    for (int i = 0; i < strlen(min_char); i++) {
+        res_char[i] = fchar[i] - schar[i] ? fchar[i] - schar[i] : '0';
+    }
+    for (int i = strlen(min_char); i < strlen(max_char); i++) {
+        res_char[i] = max_char[i];
+    }
+
+    res_char[strlen(max_char)] = 0;
+    return res_char;
+}
+
+// Journal::operator char() {
+
+//     char * main_str = new char[strlen(name) + countDigits(circulation) + countDigits(count_a_year) + 1];
+//     char * main_str_int = new char[countDigits(circulation) + countDigits(count_a_year) + 1];
+
+//     strncpy(main_str_int, (char*)circulation, countDigits(circulation) + 1);
+//     strncat(main_str_int, (char*)count_a_year, (strlen(main_str_int) + strlen((char*)count_a_year) + 1));
+
+//     strncpy(main_str,name, strlen(name));
+//     strncat(main_str, main_str_int, (strlen(main_str_int) + strlen(name) + 1));
+
+//     return *main_str;
+// }
+
+// int countDigits(int number) {
+//     std::string numberString = std::to_string(number);
+//     return numberString.length();
+// }
+
+Journal::operator bool() {
+    if (name == nullptr && count_a_year == 0 && circulation == 0) {
+        return 0;
     } else {
-        char* max_str = str2;
+        return 1;
     }
-
-    char* res_str = new char[strlen(max_str)];
-
-    cout << res_str;
-
-    for (int i = 0, j = 0; i < strlen(max_str); i++) {
-        if (*(str1 + i) == '\0') {
-            *(res_str + i) = *(str2 + i);
-        }
-        if (*(str2 + i) == '\0') {
-            *(res_str + i) = *(str1 + i);
-        } else {
-            *(res_str + i) = *(str1 + i) - *(str2 + i);
-        }
-        cout << res_str;
-    }
-
-    cout << res_str;
-
-    return res_str;
-}
-
-char* Journal::operator char(Journal& other) {
-    
-    char * main_str = new char[strlen(other.name) + countDigits(other.circulation) + countDigits(other.count_a_year) + 1];
-    char * main_str_int = new char[countDigits(other.circulation) + countDigits(other.count_a_year) + 1];
-    strncpy(main_str_int, (char*)other.circulation, countDigits(other.circulation) + 1);
-    strncat(main_str_int, (char*)other.count_a_year, (strlen(main_str_int) + strlen((char*)other.count_a_year) + 1));
-
-    
-    strncpy(main_str,other.name, strlen(other.name));
-    strncat(main_str, main_str_int, (strlen(main_str_int) + strlen(other.name) + 1));
-
-    return *main_str;
-}
-
-int countDigits(int number) {
-    std::string numberString = std::to_string(number);
-    return numberString.length();
 }

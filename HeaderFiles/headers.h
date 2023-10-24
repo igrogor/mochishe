@@ -33,11 +33,12 @@ class Journal {
     friend Journal operator-(const Journal& one, const Journal& other);
     Journal& operator++();
     Journal operator++(int);
-    char* Journal::operator char(Journal& other);
+    // operator char();
+    operator bool();
 };
 
 Journal operator-(const Journal& one, const Journal& other);
-char* severity_char(char* str1, char* str2);
+char* severity_char(char* fchar, char* schar);
 int countDigits(int number);
 
 #endif
