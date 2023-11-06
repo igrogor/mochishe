@@ -66,7 +66,7 @@ Journal Journal::operator+(Journal& other) {
     int perec;
     name = new char[strlen(oldname) + strlen(other.name) + 1];
     kapusta = new char[strlen(oldname) + strlen(other.name) + 1];
-    strncpy(name, oldname, strlen(oldname)+1);
+    strncpy(name, oldname, strlen(oldname) + 1);
     strncat(name, other.name, (strlen(oldname) + strlen(other.name) + 1));
 
     kabachok = count_a_year;
@@ -194,6 +194,26 @@ Journal::operator bool() {
     }
 }
 
-void Journal::operator <(Journal& one) {
-    cout << name  << count_a_year << circulation << endl;
+// void Journal::operator <(Journal& one) {
+//     cout << name  << count_a_year << circulation << endl;
+// }
+
+ostream& operator<<(ostream& os, const Journal& journal) {
+    os << journal.name << " " << journal.count_a_year << " " << journal.circulation;
+    return os;
+}
+
+istream& operator>>(istream& is, Journal& journal) {
+    is >> journal.name >> journal.count_a_year >> journal.circulation;
+    return is;
+}
+
+ofstream& operator<<(ofstream& ofs, const Journal& journal) {
+    ofs.write((char*)&journal, sizeof(Journal));
+    return ofs;
+}
+
+ifstream& operator>>(ifstream& ifs, Journal& journal) {
+    ifs.read((char*)&journal, sizeof(Journal));
+    return ifs;
 }

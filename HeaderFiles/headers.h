@@ -35,7 +35,11 @@ class Journal {
     Journal operator++(int);
     // operator char();
     operator bool();
-    void operator <(Journal& one) ;
+    friend ostream& operator<<(ostream& os, const Journal& journal);
+    friend istream& operator>>(istream& is, Journal& journal);
+
+    friend ofstream& operator<<(ofstream& ofs, const Journal& journal);
+    friend ifstream& operator>>(ifstream& ifs, Journal& journal);
 };
 
 Journal operator-(const Journal& one, const Journal& other);
