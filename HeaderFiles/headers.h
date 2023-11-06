@@ -28,13 +28,14 @@ class Journal {
     void print();
     void sum_journal(Journal& other);
     void edit_journal(const char* new_name, int new_year, int new_circulation);
-    void operator+(Journal& other);
+    Journal operator+(Journal& other);
     const Journal& operator=(const Journal& other);
     friend Journal operator-(const Journal& one, const Journal& other);
     Journal& operator++();
     Journal operator++(int);
     // operator char();
     operator bool();
+    void operator <(Journal& one) ;
 };
 
 Journal operator-(const Journal& one, const Journal& other);

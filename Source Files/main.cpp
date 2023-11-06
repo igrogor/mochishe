@@ -1,17 +1,10 @@
-
-
-// Для разработанного класса из лабораторной работы №1
-//  реализовать набор операций для работы с объектами
-//  класса:
-// сложение (как метод класса), -СДЕЛАНО-
-//  вычитание (как дружественную функцию), +-yes
-//   присваивание (как метод класса),yes
-//   инкремент постфиксный и инкремент  -yes
-//   префиксный (как методы класса) (разобраться и вникнуть, -yes
-//   в чем между ними разница!), приведение к некоторому типу
-//    (как метод класса).
+// Для класса из лабораторной работы №2 перегрузить операции ввода/вывода,
+//  позволяющие осуществлять ввод и вывод в удобной форме объектов классов: 
+// – вывод объекта класса в текстовый файл;
+// – вывод объекта класса в двоичный файл;
+// – ввод объекта класса из двоичного файла.
 // Дополнить демонстрационную программу,
-// продемонстрировав все перегруженные операции.
+//  продемонстрировав все перегруженные операции.
 
 #include "../HeaderFiles/headers.h"
 #define N 5
@@ -40,31 +33,37 @@ void main_window() {
     // for (int i = 0; i < N; i++) journal1[i].print();
     // cout << endl;
 
-    Journal *ja = new Journal((char *)"jajaj", 5, 4);
-    Journal jb = Journal((char *)"shishka", 10, 15);
+    // Journal *ja = new Journal((char *)"jajaj", 5, 4);
+    // Journal jb = Journal((char *)"shishka", 10, 15);
 
-    Journal sum1 = Journal((char *)"Oleg", 2, 135);
-    Journal sum2 = Journal((char *)"Mongol", 11, 155);
+    // Journal sum1 = Journal((char *)"Oleg", 2, 135);
+    // Journal sum2 = Journal((char *)"Mongol", 11, 155);
+    // Journal sum;
 
-    sum1 + sum2;
 
-    sum1.print();
+    // sum1.print();
 
-    Journal jc;
+    // sum = sum1 + sum2;
 
-    jc = sum1 - sum2;
+    // sum.print();
+    // sum1.print();
 
-    jb.print();
 
-    jc.print();
+    // Journal jc;
 
-    (++jc).print();
+    // jc = sum1 - sum2;
 
-    (jc++).print();
+    // jb.print();
 
-    jc.print();
+    // jc.print();
 
-    cout << bool(jc);
+    // (++jc).print();
+
+    // (jc++).print();
+    // jc.operator++(1);
+    // jc.print();
+
+    // cout << bool(jc);
 
     // Journal journal2("Constructor with param", 4, 354362);
     // journal2.print();
@@ -76,4 +75,6 @@ void main_window() {
     // journal1[0].print();
     // journal1[0] + journal1[2];
     // journal1[0].print();
+    Journal PlayBoy((char*)"Number_1", 213, 123);
+    (<).PlayBoy;
 }

@@ -59,14 +59,28 @@ void Journal::sum_journal(Journal& other) {
     delete[] oldname;
 }
 
-void Journal::operator+(Journal& other) {
+Journal Journal::operator+(Journal& other) {
     char* oldname = name;
+    char* kapusta;
+    int kabachok;
+    int perec;
     name = new char[strlen(oldname) + strlen(other.name) + 1];
-    strncpy(name, oldname, strlen(oldname) + 1);
+    kapusta = new char[strlen(oldname) + strlen(other.name) + 1];
+    strncpy(name, oldname, strlen(oldname)+1);
     strncat(name, other.name, (strlen(oldname) + strlen(other.name) + 1));
-    this->count_a_year += other.count_a_year;
-    this->circulation += other.circulation;
+
+    kabachok = count_a_year;
+    perec = circulation;
+
+    kabachok += other.count_a_year;
+    perec += other.circulation;
+
+    strcpy(kapusta, name);
+
+    strcpy(name, oldname);
+
     delete[] oldname;
+    return Journal(kapusta, kabachok, perec);
 }
 
 void Journal::edit_journal(const char* new_name, int new_year, int new_circulation) {
@@ -178,4 +192,8 @@ Journal::operator bool() {
     } else {
         return 1;
     }
+}
+
+void Journal::operator <(Journal& one) {
+    cout << name  << count_a_year << circulation << endl;
 }
