@@ -198,22 +198,136 @@ Journal::operator bool() {
 //     cout << name  << count_a_year << circulation << endl;
 // }
 
-ostream& operator<<(ostream& os, const Journal& journal) {
-    os << journal.name << " " << journal.count_a_year << " " << journal.circulation;
+// ostream& operator<<(ostream& os, const Journal& journal) {
+//     os << journal.name << " " << journal.count_a_year << " " << journal.circulation;
+//     return os;
+// }
+
+// istream& operator>>(istream& is, Journal& journal) {
+//     is >> journal.name >> journal.count_a_year >> journal.circulation;
+//     return is;
+// }
+
+// ofstream& operator<<(ofstream& ofs, const Journal& journal) {
+//     ofs.write((char*)&journal, sizeof(Journal));
+//     return ofs;
+// }
+
+// ifstream& operator>>(ifstream& ifs, Journal& journal) {
+//     ifs.read((char*)&journal, sizeof(Journal));
+//     return ifs;
+// }
+
+// fghdhrfghfghjnfghj
+
+std::ostream& operator<<(std::ostream& os, const Journal& journal) {
+    os << "Name: " << journal.name << std::endl;
+    os << "Count a year: " << journal.count_a_year << std::endl;
+    os << "Circulation: " << journal.circulation << std::endl;
     return os;
 }
 
-istream& operator>>(istream& is, Journal& journal) {
-    is >> journal.name >> journal.count_a_year >> journal.circulation;
+std::istream& operator>>(std::istream& is, Journal& journal) {
+    char temp_name[100];  // Предполагается, что имя журнала не превышает 100 символов
+    int temp_count, temp_circulation;
+    is >> temp_name >> temp_count >> temp_circulation;
+    journal.edit_journal(temp_name, temp_count, temp_circulation);
     return is;
 }
 
-ofstream& operator<<(ofstream& ofs, const Journal& journal) {
-    ofs.write((char*)&journal, sizeof(Journal));
-    return ofs;
+// Ввод и вывод в текстовый файл
+void Journal::writeToFile(const char* filename) {
+    std::ofstream file(filename);
+    file << *this;
+    file.close();
 }
 
-ifstream& operator>>(ifstream& ifs, Journal& journal) {
-    ifs.read((char*)&journal, sizeof(Journal));
-    return ifs;
+void Journal::readFromFile(const char* filename) {
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        file >> *this;
+        file.close();
+    }
 }
+
+// Ввод и вывод в двоичный файл
+void Journal::writeToBinaryFile(const char* filename) {
+    std::ofstream file(filename, ios::binary);
+    if (file.is_open()) {
+        int len = strlen(name) + 1;
+        file.write((char*)&len, sizeof(int));
+
+        // for (int i = 0; i < len ;i++) {
+        //     file.write((char*)&name[i], sizeof(char));
+        // }
+
+        file.write(name, len);
+        file.write((char*)&count_a_year, sizeof(int));
+        file.write((char*)&circulation, sizeof(int));
+
+        file.close();
+    }
+}
+
+void Journal::readFromBinaryFile(const char* filename) {
+    std::ifstream file(filename, ios::binary);
+    if (file.is_open()) {
+        int len = 0;
+        file.read((char*)&len, sizeof(int));
+        delete[] name;
+        name = new char[len];
+        for (int i = 0; i < len; i++) {
+            file.read((char*)&name[i], sizeof(char));
+        }
+        file.read((char*)&count_a_year, sizeof(int));
+        file.read((char*)&circulation, sizeof(int));
+
+        file.close();
+    }
+}
+
+//
+// Конструкторы:
+// daemon(int br « 10){brain = br;};
+// daemon(color sk) : monstr (sk) {brain = 10;}
+// daemon(char * nam) : monstr (nam) {brain = 10:}
+// daemon(daemon &M) : monstr (M) {brain = M.brain;}
+
+
+comics::comics() { shornsh = 0; }
+
+comics::comics(bool param) { shornsh = param; }
+
+// comics::comics(const comics& p) { shornsh = p.shornsh; }
+comics(const comics& p) : Journal (p) {shornsh = p.shornsh; }
+
+void comics::sort(comics Comics[]) {
+    for (int i = 0; i < N; i++) {
+        if (Comics->shornsh == 1) {
+            Comics->print();
+        }
+    }
+    for (int i = 0; i < N; i++) {
+        if (Comics->shornsh == 0) {
+            Comics->print();
+        }
+    }
+}
+
+void comics::print() {
+
+    if (name == nullptr)
+        cout << "u/n name\t";
+    else
+        cout << name << "\t ";
+    if (count_a_year == 0)
+        cout << "u/n count a year\t";
+    else
+        cout << count_a_year << "\t ";
+    if (circulation == 0)
+        cout << "u/n circulation\t";
+    else
+        cout << circulation << "\t";
+    cout<< shornsh<<"\n";
+}
+

@@ -6,12 +6,14 @@
 
 #include <cstdlib>
 #include <cstring>
+#include <fstream>
 #include <iostream>
+#define N 5
 
 using namespace std;
 
 class Journal {
-   private:
+   protected:
     char* name;
     int count_a_year;
     int circulation;
@@ -35,15 +37,36 @@ class Journal {
     Journal operator++(int);
     // operator char();
     operator bool();
-    friend ostream& operator<<(ostream& os, const Journal& journal);
-    friend istream& operator>>(istream& is, Journal& journal);
 
-    friend ofstream& operator<<(ofstream& ofs, const Journal& journal);
-    friend ifstream& operator>>(ifstream& ifs, Journal& journal);
+    void readFromFile(const char* filename);
+    void writeToFile(const char* filename);
+    void writeToBinaryFile(const char* filename);
+    void readFromBinaryFile(const char* filename);
+
+    // friend ostream& operator<<(ostream& os, const Journal& journal);
+    // friend istream& operator>>(istream& is, Journal& journal);
+
+    // friend ofstream& operator<<(ofstream& ofs, const Journal& journal);
+    // friend ifstream& operator>>(ifstream& ifs, Journal& journal);
+
+    friend std::ostream& operator<<(std::ostream& os, const Journal& journal);
+    friend std::istream& operator>>(std::istream& is, Journal& journal);
 };
 
 Journal operator-(const Journal& one, const Journal& other);
 char* severity_char(char* fchar, char* schar);
 int countDigits(int number);
+
+class comics : public Journal  {
+   private:
+    bool shornsh;
+
+   public:
+    comics();
+    comics(bool yorn);
+    comics(const comics& p);
+    void sort(comics Comics[]);
+    void print();
+};
 
 #endif
