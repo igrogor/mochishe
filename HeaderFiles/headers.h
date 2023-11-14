@@ -57,7 +57,7 @@ Journal operator-(const Journal& one, const Journal& other);
 char* severity_char(char* fchar, char* schar);
 int countDigits(int number);
 
-class comics : public Journal  {
+class comics : public Journal {
    private:
     bool shornsh;
 

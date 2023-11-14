@@ -293,13 +293,12 @@ void Journal::readFromBinaryFile(const char* filename) {
 // daemon(char * nam) : monstr (nam) {brain = 10:}
 // daemon(daemon &M) : monstr (M) {brain = M.brain;}
 
-
 comics::comics() { shornsh = 0; }
 
 comics::comics(bool param) { shornsh = param; }
 
 // comics::comics(const comics& p) { shornsh = p.shornsh; }
-comics(const comics& p) : Journal (p) {shornsh = p.shornsh; }
+comics(const comics& p) : Journal(p) { shornsh = p.shornsh; }
 
 void comics::sort(comics Comics[]) {
     for (int i = 0; i < N; i++) {
@@ -315,7 +314,6 @@ void comics::sort(comics Comics[]) {
 }
 
 void comics::print() {
-
     if (name == nullptr)
         cout << "u/n name\t";
     else
@@ -328,6 +326,5 @@ void comics::print() {
         cout << "u/n circulation\t";
     else
         cout << circulation << "\t";
-    cout<< shornsh<<"\n";
+    cout << shornsh << "\n";
 }
-

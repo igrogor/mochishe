@@ -113,19 +113,15 @@ void main_window() {
     // journal.readFromBinaryFile("journal.dat");  // Чтение из двоичного файла
     // journal.print();
 
-
     comics Marvel[N];
-    for (int i = 0; i < N; i++)
-    {
+    for (int i = 0; i < N; i++) {
         Marvel[i].print();
     }
 
-    cout<<endl;
-    
-        for (int i = 0; i < N; i++)
-    {
-        
+    cout << endl;
+
+    for (int i = 0; i < N; i++) {
     }
-    
+
     Marvel->sort(Marvel);
 }
