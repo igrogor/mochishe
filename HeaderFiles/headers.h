@@ -27,11 +27,14 @@ class Journal {
     void set_name(const char* nam);
     void set_year(int year);
     void set_circulation(int circulation);
-    void print();
+    int get_circulation();
+    int get_year();
+    char* get_name();
+    virtual void print();
     void sum_journal(Journal& other);
     void edit_journal(const char* new_name, int new_year, int new_circulation);
-    Journal operator+(Journal& other);
-    const Journal& operator=(const Journal& other);
+    virtual Journal operator+(Journal& other);
+    virtual const Journal& operator=(const Journal& other);
     friend Journal operator-(const Journal& one, const Journal& other);
     Journal& operator++();
     Journal operator++(int);
@@ -57,16 +60,29 @@ Journal operator-(const Journal& one, const Journal& other);
 char* severity_char(char* fchar, char* schar);
 int countDigits(int number);
 
-class comics : public Journal {
+class Comics : public Journal {
    private:
     bool shornsh;
 
    public:
-    comics();
-    comics(bool yorn);
-    comics(const comics& p);
-    void sort(comics Comics[]);
+    Comics();
+    Comics(bool yorn, char* newname, int newcount, int newcirc);
+    Comics(const Comics& p);
+    void sort(Comics Comics[]);
     void print();
+};
+
+class Gazette : public Journal {
+   private:
+    int number_of_articles;
+
+   public:
+    Gazette();
+    Gazette(int number_of_articles, char* newname, int newcount, int newcirc);
+    Gazette(const Gazette& p);
+    Gazette operator+(Gazette& other);
+    void print_gazette();
+    Gazette operator=(Gazette& other);
 };
 
 #endif

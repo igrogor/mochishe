@@ -47,7 +47,7 @@ void main_window() {
     // sum.print();
     // sum1.print();
 
-    // Journal jc;
+    Journal jc;
 
     // jc = sum1 - sum2;
 
@@ -113,15 +113,29 @@ void main_window() {
     // journal.readFromBinaryFile("journal.dat");  // Чтение из двоичного файла
     // journal.print();
 
-    comics Marvel[N];
-    for (int i = 0; i < N; i++) {
-        Marvel[i].print();
-    }
+    // comics Marvel[N];
+    // for (int i = 0; i < N; i++) {
+    //     Marvel[i].print();
+    // }
 
-    cout << endl;
+    // cout << endl;
 
-    for (int i = 0; i < N; i++) {
-    }
+    // for (int i = 0; i < N; i++) {
+    // }
 
-    Marvel->sort(Marvel);
+    // Marvel->sort(Marvel);
+
+    Journal* ptr = new Journal();
+    ptr->print();
+    delete ptr;
+
+    ptr = new Comics();
+    ptr->print();
+    delete ptr;
+
+    Gazette Gazette1(123, "fbv",123 ,213);
+    Gazette Gazette2(123, "2bf",123 ,213);
+    Gazette gaz = Gazette1 + Gazette2;
+    jc.print();
+    gaz.print_gazette();
 }

@@ -45,9 +45,14 @@ void Journal::set_name(const char* nam) {
     name = new char[strlen(nam) + 1];
     strncpy(name, nam, strlen(nam) + 1);
 }
+char* Journal::get_name() {return name;}
+
+
 void Journal::set_year(int newyear) { count_a_year = newyear; }
+int Journal::get_year() {return count_a_year;}
 
 void Journal::set_circulation(int newcirc) { circulation = newcirc; }
+int Journal::get_circulation() {return circulation;}
 
 void Journal::sum_journal(Journal& other) {
     char* oldname = name;
@@ -293,27 +298,49 @@ void Journal::readFromBinaryFile(const char* filename) {
 // daemon(char * nam) : monstr (nam) {brain = 10:}
 // daemon(daemon &M) : monstr (M) {brain = M.brain;}
 
-comics::comics() { shornsh = 0; }
+Comics::Comics() { shornsh = 0; }
 
-comics::comics(bool param) { shornsh = param; }
+Comics::Comics(bool param, char* newname, int newcount, int newcirc) : Journal( newname, newcount, newcirc) { 
+    
+    shornsh = param; 
+}
 
-// comics::comics(const comics& p) { shornsh = p.shornsh; }
-comics(const comics& p) : Journal(p) { shornsh = p.shornsh; }
+Comics::Comics(const Comics & p) : Journal(p) { shornsh = p.shornsh; }
 
-void comics::sort(comics Comics[]) {
+void Comics::sort(Comics comics[]) {
     for (int i = 0; i < N; i++) {
-        if (Comics->shornsh == 1) {
-            Comics->print();
+        if (comics->shornsh == 1) {
+            comics->print();
         }
     }
     for (int i = 0; i < N; i++) {
-        if (Comics->shornsh == 0) {
-            Comics->print();
+        if (comics->shornsh == 0) {
+            comics->print();
         }
     }
 }
 
-void comics::print() {
+void Comics::print() {
+    Journal::print();
+    cout << shornsh << "\n";
+}
+
+
+Gazette::Gazette() { number_of_articles = 0; }
+
+Gazette::Gazette(int param, char* newname, int newcount, int newcirc) :Journal( newname, newcount, newcirc) { 
+    number_of_articles = param; 
+}
+
+Gazette::Gazette(const Gazette & p) : Journal(p) { number_of_articles = p.number_of_articles; }
+
+Gazette Gazette::operator+(Gazette& other) {
+    Journal temp = this->Journal::operator+(other);
+    int new_number_of_articles = this->number_of_articles + other.number_of_articles;
+    return Gazette(new_number_of_articles, temp.get_name(), temp.get_year(), temp.get_circulation());
+}
+
+void Gazette::print_gazette() {
     if (name == nullptr)
         cout << "u/n name\t";
     else
@@ -326,5 +353,15 @@ void comics::print() {
         cout << "u/n circulation\t";
     else
         cout << circulation << "\t";
-    cout << shornsh << "\n";
+    if (number_of_articles == 0)
+        cout << "u/n number_of_articles\n";
+    else
+        cout << number_of_articles << "\n";
+        
 }
+Gazette Gazette::operator=(Gazette& other) {
+    Journal temp = this->Journal::operator=(other);
+    number_of_articles = other.number_of_articles;
+    return Gazette(number_of_articles, temp.get_name(), temp.get_year(), temp.get_circulation());
+}
+
