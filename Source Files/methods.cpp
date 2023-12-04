@@ -1,3 +1,6 @@
+#include <cstdio>
+#include <initializer_list>
+#include <iterator>
 #include "../HeaderFiles/headers.h"
 
 using namespace std;
@@ -365,3 +368,149 @@ Gazette Gazette::operator=(Gazette& other) {
     return Gazette(number_of_articles, temp.get_name(), temp.get_year(), temp.get_circulation());
 }
 
+
+
+// ===================================================================================//
+
+
+deque::deque() {
+    head = NULL;
+    tail = NULL;
+    current = NULL;
+    size_list = 0;
+    id_node = 0;
+}
+
+deque::deque(int size, ...) {
+    size_list = size;
+    head = new Node;
+    tail = new Node;
+    current = head;
+    id_node = 0;
+
+    va_list args;
+	va_start(args, size);
+    Comics object = va_arg(args, Comics);
+    tail = initializetr_list(object++);
+
+    for(int i = 0; i < size; i++) {
+        object = va_arg(args, Comics);
+        add(object);
+    }
+    tail->next = NULL;
+}
+
+deque::deque(const deque& origin_object) {
+    tail = new Node;
+    head = new Node;
+    current = head;
+    size_list = origin_object.size_list;
+    id_node = 0;
+
+    Node* point = head;
+    Comics object = point->object;
+    tail = initializetr_list(object);
+    point = point->next;
+
+    for (int i = 1; i < origin_object.size_list; i++) {
+        object = point->object;
+        add(object);
+        point = point->next;
+    }
+    tail->next= NULL;
+}
+
+deque:: Node* deque::initializetr_list(Comics object) {
+    id_node = 1;
+    head->object = object;
+    head->prev = NULL;
+    head->num_in_list = id_node++; 
+
+    return head;
+}
+ void deque::add(Comics object) {
+    Node* new_Node = new Node;
+    tail->next = new_Node;
+    new_Node->object = object;
+    new_Node->prev = tail;
+    new_Node->num_in_list = id_node++;
+    tail = new_Node;
+ }
+
+
+void deque::input_Node(int num_in_list, Comics object) {
+    current = search(num_in_list);
+    if (current != NULL) {
+        Node* new_Node= new Node;
+        Node* newNode = new Node;
+		newNode->object = object;
+		newNode->prev = current->prev;
+		newNode->num_in_list = current->num_in_list;
+		newNode->next = current;
+		current->prev->next = newNode;
+		current->prev = newNode;
+        size_list++;
+        for(int i = num_in_list; i < size_list; i++) {
+            current->num_in_list++;
+            current = current->next;
+        }
+    }else{
+        cout <<endl<< "ERROR, node not such" << endl;
+    }
+}
+
+Comics deque::readLeft() {
+	Comics object = current->object;
+	current = current->next;
+	return object;
+}
+
+Comics deque::readRight() {
+	Comics object = current->object;
+	current = current->prev;
+	return object;
+}
+
+Comics deque::sampleLeft(){
+	Comics object = current->object;
+	deleteLeftNode();
+	return object;
+}
+
+Comics deque::sampleRight() {
+	Comics object = current->object;
+	deleteRightNode();
+	return object;
+}
+
+deque::Node* deque::search(int num_in_list) {
+    current = head;
+    if(num_in_list == 0 || num_in_list > size_list) {
+        cout <<"Error, no such object"<<endl;
+        return NULL;
+    }for(int i = 0; current != NULL && num_in_list != current->num_in_list; i++) {
+        current = current->next;
+    }if(num_in_list == current->num_in_list) return current;
+    return nullptr;
+}deque::Node* deque::search(int num_in_list) {
+    current = head;
+    if(num_in_list == 0 || num_in_list > size_list) {
+        cout <<"Error, no such object"<<endl;
+        return NULL;
+    }for(int i = 0; current != NULL && num_in_list != current->num_in_list; i++) {
+        current = current->next;
+    }if(num_in_list == current->num_in_list) return current;
+    return nullptr;
+}
+// deque::Node* deque::search(Comics object) {
+// 	current = head;
+// 	int lenghtOne = object->getLenght();
+// 	bool check = false;
+// 	for (int i = 0; current != nullptr && check != true; i++) {
+// 		int lenghtTwo = current->object->getLenght();
+// 		bool coincidence = true;
+// 		for (int j = 0; j < lenghtOne && j < lenghtTwo && lenghtTwo == lenghtOne; j++) {
+// 			if (object->getNum()[j] == '-' && current->object->getNum()[j] == '-') j++;
+
+
+// }

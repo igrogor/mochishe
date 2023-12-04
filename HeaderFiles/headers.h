@@ -3,11 +3,15 @@
 
 #include <string.h>
 #include <time.h>
-
 #include <cstdlib>
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <bitset>
+#include <cstdarg>
+#pragma once
 #define N 5
 
 using namespace std;
@@ -83,6 +87,37 @@ class Gazette : public Journal {
     Gazette operator+(Gazette& other);
     void print_gazette();
     Gazette operator=(Gazette& other);
+};
+
+
+//--------------------------------------------------------------------------------------//
+
+class deque{
+    protected:
+        struct Node {
+            Node* next;
+            Node* prev;
+            int num_in_list;
+            Comics object;
+        };
+        Node* head;
+        Node* tail;
+        Node* current;
+        int size_list;
+        int id_node;
+
+    public:
+        deque();
+        deque(int id, ...);
+        deque(const deque&);
+        Node* initializetr_list(Comics obj);
+	    void add(Comics obj);
+        void input_Node(int num_in_list, Comics object);
+        Comics readLeft();
+	    Comics readRight();
+	    Comics sampleLeft();
+	    Comics sampleRight();
+
 };
 
 #endif
