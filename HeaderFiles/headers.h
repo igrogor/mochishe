@@ -25,7 +25,7 @@ class Journal {
    public:
     friend class FriendJournal;
     Journal();
-    Journal(char* newname, int newcount, int newcirc);
+    Journal(const char* newname, int newcount, int newcirc);
     Journal(const Journal& p);
     ~Journal();
     void set_name(const char* nam);
@@ -70,10 +70,11 @@ class Comics : public Journal {
 
    public:
     Comics();
-    Comics(bool yorn, char* newname, int newcount, int newcirc);
+    Comics(bool yorn, const char* newname, int newcount, int newcirc);
     Comics(const Comics& p);
     void sort(Comics Comics[]);
     void print();
+    bool get_shornsh();
 };
 
 class Gazette : public Journal {
@@ -88,7 +89,6 @@ class Gazette : public Journal {
     void print_gazette();
     Gazette operator=(Gazette& other);
 };
-
 
 //--------------------------------------------------------------------------------------//
 
@@ -113,10 +113,14 @@ class deque{
         Node* initializetr_list(Comics obj);
 	    void add(Comics obj);
         void input_Node(int num_in_list, Comics object);
-        Comics readLeft();
-	    Comics readRight();
-	    Comics sampleLeft();
-	    Comics sampleRight();
+        Comics* readLeft();
+        void del(int id_node);
+        void deleteLeftNode();
+        void deleteRightNode();
+        Comics* outputElementByID(int id_node);
+        void printElements();
+        Node* search(int num_in_list);
+       ~deque();
 
 };
 
