@@ -1,16 +1,17 @@
 #ifndef HEADERS
 #define HEADERS
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
+#include <bitset>
+#include <cstdarg>
 #include <cstdlib>
 #include <cstring>
 #include <fstream>
 #include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <bitset>
-#include <cstdarg>
 #pragma once
 #define N 5
 
@@ -92,36 +93,35 @@ class Gazette : public Journal {
 
 //--------------------------------------------------------------------------------------//
 
-class deque{
-    protected:
-        struct Node {
-            Node* next;
-            Node* prev;
-            int num_in_list;
-            Comics object;
-        };
-        Node* head;
-        Node* tail;
-        Node* current;
-        int size_list;
-        int id_node;
+class deque {
+   protected:
+    struct Node {
+        Node* next;
+        Node* prev;
+        int num_in_list;
+        Comics object;
+    };
+    Node* head;
+    Node* tail;
+    Node* current;
+    int size_list;
+    int id_node;
 
-    public:
-        deque();
-        deque(int id, ...);
-        deque(const deque&);
-        Node* initializetr_list(Comics obj);
-	    void add(Comics obj);
-        void input_Node(int num_in_list, Comics object);
-        Comics* readLeft();
-        void del(int id_node);
-        void deleteLeftNode();
-        void deleteRightNode();
-        Comics* outputElementByID(int id_node);
-        void printElements();
-        Node* search(int num_in_list);
-       ~deque();
-
+   public:
+    deque();
+    deque(int id, ...);
+    deque(const deque&);
+    Node* initializetr_list(Comics obj);
+    void add(Comics obj);
+    void input_Node(int num_in_list, Comics object);
+    Comics* readLeft();
+    void del(int id_node);
+    void deleteLeftNode();
+    void deleteRightNode();
+    Comics* outputElementByID(int id_node);
+    void printElements();
+    Node* search(int num_in_list);
+    ~deque();
 };
 
 #endif

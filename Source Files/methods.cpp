@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <initializer_list>
 #include <iterator>
+
 #include "../HeaderFiles/headers.h"
 
 using namespace std;
@@ -11,45 +12,18 @@ Journal::Journal() {
     circulation = 0;
 }
 
-//4294967296
+// 4294967296
 
 Journal::Journal(const char* newname, int newcount, int newcirc) {
-    try
-    {
-        if(sizeof(newname) < 3) 
-            throw "lack of memory\n";
-        name = new char[strlen(newname) + 1];
-        strncpy(name, newname, strlen(newname) + 1);
-    }
-    catch(const char* error_message)
-    {
-        std::cout << error_message << '\n';
-    }
-    
-    try
-    {
-        if(newcount < 1500 || newcount > 2023) 
-            throw "exceeding the range of permissible values\n";
-        count_a_year = newcount;
-    }
-    catch(const char* error_message)
-    {
-        std::cout << error_message << '\n';
-    }
-    
-    
-    try
-    {
-        if(newcount < 0 || newcount > 1000000000)
-            throw "exceeding the range of permissible values\n";
-        circulation = newcirc;/* code */
-    }
-    catch(const char* error_message)
-    {
-        std::cout << error_message << '\n';
-    }
-    
-    
+    if (sizeof(newname) > 4294967296) throw "lack of memory\n";
+    name = new char[strlen(newname) + 1];
+    strncpy(name, newname, strlen(newname) + 1);
+
+    if (newcount < 1500 || newcount > 2023) throw "exceeding the range of permissible values\n";
+    count_a_year = newcount;
+
+    if (newcount < 0 || newcount > 1000000000) throw "exceeding the range of permissible values\n";
+    circulation = newcirc; /* code */
 }
 
 Journal::Journal(const Journal& p) {
@@ -83,17 +57,17 @@ void Journal::set_name(const char* nam) {
     strncpy(name, nam, strlen(nam) + 1);
 }
 
-char* Journal::get_name() {return name;}
+char* Journal::get_name() { return name; }
 
-bool Comics::get_shornsh() {return shornsh;}
+bool Comics::get_shornsh() { return shornsh; }
 
-void Journal::set_year(int newyear) { count_a_year = newyear;}
+void Journal::set_year(int newyear) { count_a_year = newyear; }
 
-int Journal::get_year() {return count_a_year;}
+int Journal::get_year() { return count_a_year; }
 
 void Journal::set_circulation(int newcirc) { circulation = newcirc; }
 
-int Journal::get_circulation() {return circulation;}
+int Journal::get_circulation() { return circulation; }
 
 void Journal::sum_journal(Journal& other) {
     char* oldname = name;
@@ -342,25 +316,12 @@ void Journal::readFromBinaryFile(const char* filename) {
 
 Comics::Comics() { shornsh = 0; }
 
-Comics::Comics(bool param, const char* newname, int newcount, int newcirc) : Journal( newname, newcount, newcirc) { 
-    try
-    {
-        if (param != 0 || param != 1)
-        {
-            throw "Input Error\n";
-        }
-        
-        shornsh = param; 
-    }
-    catch(const char* error_message)
-    {
-        std::cout << error_message << '\n';
-    }
-    
-
+Comics::Comics(bool param, const char* newname, int newcount, int newcirc)
+    : Journal(newname, newcount, newcirc) {
+    shornsh = param;
 }
 
-Comics::Comics(const Comics & p) : Journal(p) { shornsh = p.shornsh; }
+Comics::Comics(const Comics& p) : Journal(p) { shornsh = p.shornsh; }
 
 void Comics::sort(Comics comics[]) {
     for (int i = 0; i < N; i++) {
@@ -382,25 +343,15 @@ void Comics::print() {
 
 Gazette::Gazette() { number_of_articles = 0; }
 
-Gazette::Gazette(int param, char* newname, int newcount, int newcirc) :Journal( newname, newcount, newcirc) { 
-    try
-    {
-        if (param < 0)
-        {
-            throw "tahe number of articles cannot be negative\n";
-        }
-
-        number_of_articles = param; 
+Gazette::Gazette(int param, char* newname, int newcount, int newcirc) : Journal(newname, newcount, newcirc) {
+    if (param < 0) {
+        throw "tahe number of articles cannot be negative\n";
     }
-    catch(const char* error_message)
-    {
-        std::cout << error_message << '\n';
-    }
-    
 
+    number_of_articles = param;
 }
 
-Gazette::Gazette(const Gazette & p) : Journal(p) { number_of_articles = p.number_of_articles; }
+Gazette::Gazette(const Gazette& p) : Journal(p) { number_of_articles = p.number_of_articles; }
 
 Gazette Gazette::operator+(Gazette& other) {
     Journal temp = this->Journal::operator+(other);
@@ -424,7 +375,7 @@ void Gazette::print_gazette() {
     if (number_of_articles == 0)
         cout << "u/n number_of_articles\n";
     else
-        cout << number_of_articles << "\n";        
+        cout << number_of_articles << "\n";
 }
 Gazette Gazette::operator=(Gazette& other) {
     Journal temp = this->Journal::operator=(other);
@@ -450,11 +401,11 @@ deque::deque(int size, ...) {
     id_node = 0;
 
     va_list args;
-	va_start(args, size);
+    va_start(args, size);
     Comics object = va_arg(args, Comics);
     tail = initializetr_list(object);
 
-    for(int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {
         object = va_arg(args, Comics);
         add(object);
     }
@@ -478,139 +429,132 @@ deque::deque(const deque& origin_object) {
         add(object);
         point = point->next;
     }
-    tail->next= NULL;
+    tail->next = NULL;
 }
 
-deque:: Node* deque::initializetr_list(Comics object) {
+deque::Node* deque::initializetr_list(Comics object) {
     id_node = 1;
     head->object = object;
     head->prev = NULL;
-    head->num_in_list = id_node++; 
+    head->num_in_list = id_node++;
 
     return head;
 }
 
- void deque::add(Comics object) {
+void deque::add(Comics object) {
     Node* new_Node = new Node;
     tail->next = new_Node;
     new_Node->object = object;
     new_Node->prev = tail;
     new_Node->num_in_list = id_node++;
     tail = new_Node;
- }
+}
 
 void deque::input_Node(int num_in_list, Comics object) {
     current = search(num_in_list);
     if (current != NULL) {
-        Node* new_Node= new Node;
+        Node* new_Node = new Node;
         Node* newNode = new Node;
-		newNode->object = object;
-		newNode->prev = current->prev;
-		newNode->num_in_list = current->num_in_list;
-		newNode->next = current;
-		current->prev->next = newNode;
-		current->prev = newNode;
+        newNode->object = object;
+        newNode->prev = current->prev;
+        newNode->num_in_list = current->num_in_list;
+        newNode->next = current;
+        current->prev->next = newNode;
+        current->prev = newNode;
         size_list++;
-        for(int i = num_in_list; i < size_list; i++) {
+        for (int i = num_in_list; i < size_list; i++) {
             current->num_in_list++;
             current = current->next;
         }
-    }else{
-        cout <<endl<< "ERROR, node not such\n" << endl;
+    } else {
+        cout << endl << "ERROR, node not such\n" << endl;
     }
 }
 
 Comics* deque::readLeft() {
-	Comics* object = &current->object;
-	current = current->next;
-	return object;
+    Comics* object = &current->object;
+    current = current->next;
+    return object;
 }
-
 
 deque::Node* deque::search(int num_in_list) {
     current = head;
-    if(num_in_list == 0 || num_in_list > size_list) {
-        cout <<"Error, no such object\n"<<endl;
+    if (num_in_list == 0 || num_in_list > size_list) {
+        cout << "Error, no such object\n" << endl;
         return NULL;
-    }for(int i = 0; current != NULL && num_in_list != current->num_in_list; i++) {
+    }
+    for (int i = 0; current != NULL && num_in_list != current->num_in_list; i++) {
         current = current->next;
-    }if(num_in_list == current->num_in_list) return current;
+    }
+    if (num_in_list == current->num_in_list) return current;
     return nullptr;
 }
 
 void deque::printElements() {
     current = head;
-    for (int i = 0; i < size_list; i++)
-    {
-        Journal* obj = (Journal*) readLeft();
+    for (int i = 0; i < size_list; i++) {
+        Journal* obj = (Journal*)readLeft();
         obj->print();
     }
-    
 }
 
 Comics* deque::outputElementByID(int id_node2) {
-	if (search(id_node2) != nullptr) {
-		Journal* p = (Journal*) &(current->object);
-		p->print();
-		return &(current->object);
-	}
-	return nullptr;
+    if (search(id_node2) != nullptr) {
+        Journal* p = (Journal*)&(current->object);
+        p->print();
+        return &(current->object);
+    }
+    return nullptr;
 }
 
 void deque::deleteLeftNode() {
-	if (head != tail) {
-		head = head->next;
-		delete head->prev;
-		head->prev = nullptr;
-	}
-	else {
-		delete head;
-		tail = nullptr;
-		head = nullptr;
-	}
-	size_list--;
+    if (head != tail) {
+        head = head->next;
+        delete head->prev;
+        head->prev = nullptr;
+    } else {
+        delete head;
+        tail = nullptr;
+        head = nullptr;
+    }
+    size_list--;
 }
 
 void deque::deleteRightNode() {
-	if (head != tail) {
-		tail = tail->prev;
-		delete tail->next;
-		tail->next = nullptr;
-	}
-	else {
-		delete tail;
-		tail = nullptr;
+    if (head != tail) {
+        tail = tail->prev;
+        delete tail->next;
+        tail->next = nullptr;
+    } else {
+        delete tail;
+        tail = nullptr;
         head = nullptr;
-	}
-	size_list--;
+    }
+    size_list--;
 }
 
 void deque::del(int num_in_list) {
-	current = search(num_in_list);
-	if (current != nullptr) {
-		current->prev->next = current->next;
-		current->next->prev = current->prev;
-		Node* buf = new Node;
-		buf = current->next;
-		delete current;
-		current = buf;
-		size_list--;
-		for (int i = num_in_list; i <= size_list; i++) {
-			current->num_in_list--;
-			current = current->next;
-		}
-	}
-	else cout << "\nError" << endl;
+    current = search(num_in_list);
+    if (current != nullptr) {
+        current->prev->next = current->next;
+        current->next->prev = current->prev;
+        Node* buf = new Node;
+        buf = current->next;
+        delete current;
+        current = buf;
+        size_list--;
+        for (int i = num_in_list; i <= size_list; i++) {
+            current->num_in_list--;
+            current = current->next;
+        }
+    } else
+        cout << "\nError" << endl;
 }
 
-deque:: ~deque() {
-    for (int i = 0; i < size_list; i++)
-    {
+deque::~deque() {
+    for (int i = 0; i < size_list; i++) {
         deleteLeftNode();
     }
-    
-	delete head, tail, current;
+
+    delete head, tail, current;
 }
-
-
-

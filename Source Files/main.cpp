@@ -143,7 +143,6 @@ void main_window() {
     // Comics C3(1, "srvdfver", 1562, 23453);
     // Comics C4(0, "wefsrvwefer", 112, 23453);
 
-
     // deque obj1(4,C1,C2,C3,C4);
 
     // obj1.printElements();
@@ -152,18 +151,28 @@ void main_window() {
     // obj1.deleteLeftNode();
     // obj1.printElements();
 
-    //obj1.outputElementByID(3);
+    // obj1.outputElementByID(3);
 
+    try {
+        Journal one("sdfvdsf", 213, 0);
+        one.print();
+    } catch (const char* error_message) {
+        std::cout << error_message << '\n';
+    }
 
-    Journal one("sdfvdsf", 213, 0);
-    Comics two(2,"dfsdf",32345,334);
-    Gazette three(-34,"fdg",435,436);
+    try {
+        Comics two(true, "dfsdf", 2020, 334);
+        two.print();
+    } catch (const char* error_message) {
+        std::cout << error_message << '\n';
+    }
 
+    try {
+        Gazette three(-34, "fdg", 435, 436);
+        three.print();
+    } catch (const char* error_message) {
+        std::cout << error_message << '\n';
+    }
 
-    one.print();
-    two.print();
-    three.print();
-    
     std::cout << '\n' << "The end" << '\n';
-    
 }
