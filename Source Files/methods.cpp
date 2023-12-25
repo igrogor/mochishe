@@ -22,7 +22,7 @@ Journal::Journal(const char* newname, int newcount, int newcirc) {
     if (newcount < 1500 || newcount > 2023) throw "exceeding the range of permissible values\n";
     count_a_year = newcount;
 
-    if (newcount < 0 || newcount > 1000000000) throw "exceeding the range of permissible values\n";
+    if (newcirc < 0 || newcirc > 1000000000) throw "exceeding the range of permissible values\n";
     circulation = newcirc; /* code */
 }
 

@@ -1,33 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <cstring>
 #include <iostream>
-//#include <stdexcept>
-
-// Структура, представляющая элемент очереди
-// struct QueueElement {
-//     char character[50];  // Максимальная длина слова
-
-//     QueueElement() {
-//         character[0] = '\0';  // Пустая строка по умолчанию
-//     }
-//     // Конструктор для удобного создания элемента
-//     QueueElement(const char* c, int v) {
-//         strncpy(character, c, sizeof(character) - 1);
-//         character[sizeof(character) - 1] = '\0';  // Гарантия завершенности строки
-        
-//     }
-// };
-// struct QueueElementInt {
-//     int value;
-//     QueueElement() {
-//         character[0] = '\0';  // Пустая строка по умолчанию
-//         value = 0;
-//     }
-//     // Конструктор для удобного создания элемента
-//     QueueElement(int v) {
-//         value = v;
-//     }
-// };
 
 template <typename T, int Size>
 class CircularQueue {
